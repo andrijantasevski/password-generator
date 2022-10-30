@@ -1,19 +1,22 @@
 import { useEffect, useState } from "react";
 import { Transition } from "@headlessui/react";
 import PasswordGenerator from "./components/PasswordGenerator";
+import usePassword from "./utils/generatePassword";
+import copyPassword from "./utils/useCopyPassword";
+import useCopyPassword from "./utils/useCopyPassword";
 
 function App() {
-  const [passwordCopied, setPasswordCopied] = useState(false);
+  const { password, generatePassword } = usePassword();
+  const { passwordCopied, copyPassword } = useCopyPassword();
 
-  function togglePasswordPopUp() {
-    setPasswordCopied((prev) => !prev);
-    setTimeout(() => setPasswordCopied((prev) => !prev), 1500);
-  }
+  useEffect(() => {
+    generatePassword(12, true, true, true, true)
+  }, [])
 
   return (
     <div className="main-background relative flex h-screen items-center justify-center">
       <div className="mx-auto w-11/12 lg:w-6/12">
-        <PasswordGenerator togglePasswordPopUp={togglePasswordPopUp} />
+        <PasswordGenerator generatedPassword={password} generatePassword={generatePassword} copyPassword={copyPassword} />
       </div>
       <Transition
         show={passwordCopied}

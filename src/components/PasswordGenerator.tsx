@@ -1,24 +1,20 @@
-import { useEffect } from "react";
-import copyPassword from "../utils/copyPassword";
-import usePassword from "../utils/generatePassword";
-
 interface Props {
-  togglePasswordPopUp: () => void;
+  generatedPassword: string,
+  generatePassword: (length: number, isLowerCase: boolean, isUpperCase: boolean, isNumbers: boolean, isSymbols: boolean) => void,
+  copyPassword: (password: string) => void
 }
 
-function PasswordGenerator({ togglePasswordPopUp }: Props) {
-  const [password, generatePassword] = usePassword();
-
+function PasswordGenerator({ generatedPassword, generatePassword, copyPassword }: Props) {
   return (
     <div className="blur-container flex w-full items-center justify-between rounded-md p-4">
-      <p className="text-xl text-white lg:text-3xl">{password}</p>
+      <p className="text-xl text-white lg:text-3xl">{generatedPassword}</p>
 
       <div className="flex items-center gap-3">
         <button
           type="button"
           aria-label="Copy password"
           title="Copy password"
-          onClick={() => togglePasswordPopUp()}
+          onClick={() => copyPassword(generatedPassword)}
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -35,6 +31,7 @@ function PasswordGenerator({ togglePasswordPopUp }: Props) {
             />
           </svg>
         </button>
+
         <button
           type="button"
           aria-label="Generate password"
