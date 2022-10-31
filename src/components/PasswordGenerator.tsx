@@ -1,10 +1,13 @@
+import { FormTypes } from "../App"
+
 interface Props {
   generatedPassword: string,
-  generatePassword: (length: number, isLowerCase: boolean, isUpperCase: boolean, isNumbers: boolean, isSymbols: boolean) => void,
+  generatePassword: (length: number, isUpperCase: boolean, isNumbers: boolean, isSymbols: boolean) => void,
   copyPassword: (password: string) => void
+  formData: FormTypes
 }
 
-function PasswordGenerator({ generatedPassword, generatePassword, copyPassword }: Props) {
+function PasswordGenerator({ generatedPassword, generatePassword, copyPassword, formData }: Props) {
   return (
     <div className="blur-container flex w-full items-center justify-between rounded-md p-4">
       <p className="text-xl text-white lg:text-3xl">{generatedPassword}</p>
@@ -36,7 +39,7 @@ function PasswordGenerator({ generatedPassword, generatePassword, copyPassword }
           type="button"
           aria-label="Generate password"
           title="Generate password"
-          onClick={() => generatePassword(12, true, false, true, true)}
+          onClick={() => generatePassword(formData.passwordLength, formData.isUpperCase, formData.isNumbers, formData.isSymbols)}
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
