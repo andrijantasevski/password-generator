@@ -4,7 +4,7 @@ import generateRandomInt from "./generateRandomInt";
 export default function usePassword() {
     const [password, setPassword] = useState("");
 
-    function generatePassword(length: number, isLowerCase: boolean, isUpperCase: boolean, isNumbers: boolean, isSymbols: boolean) {
+    function generatePassword(passwordLength: number, isUpperCase: boolean, isNumbers: boolean, isSymbols: boolean) {
 
         const lowerCase = [...Array(26)].map((_, i) => String.fromCharCode(i + 97));
 
@@ -15,7 +15,7 @@ export default function usePassword() {
         const symbols = ["~", "!", "@", "#", "$", "%", "^", "&", "*", "(", ")", "-", "_", "+", "=", "?"];
 
         const availableCharacters = [
-            ...(isLowerCase ? lowerCase : []),
+            ...lowerCase,
             ...(isUpperCase ? upperCase : []),
             ...(isNumbers ? numbers : []),
             ...(isSymbols ? symbols : []),
@@ -23,10 +23,10 @@ export default function usePassword() {
 
         let passwordArray: (string | number)[] = [];
 
-        for (let i = 0; i < length; i++) {
+        for (let i = 0; i < passwordLength; i++) {
             const randomIndex = generateRandomInt(0, availableCharacters.length);
 
-            passwordArray.push(availableCharacters[randomIndex])
+            passwordArray.push(availableCharacters[randomIndex]);
         }
 
         const passwordString = passwordArray.join("");
