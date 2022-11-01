@@ -15,7 +15,7 @@ function PasswordCopiedPopUp({ passwordCopied }: Props) {
             leaveFrom="opacity-100"
             leaveTo="opacity-0"
         >
-            <div className="blur-container absolute bottom-4 right-4 flex items-center gap-2 rounded-md p-2 text-sm text-neutral-50">
+            <div className="blur-container absolute top-4 right-4 flex items-center gap-2 rounded-md p-2 text-sm text-neutral-50">
                 <p>Password copied</p>
                 <svg
                     xmlns="http://www.w3.org/2000/svg"
