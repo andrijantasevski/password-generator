@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useEffect } from "react"
 import { FormTypes } from "../App"
 import * as Slider from '@radix-ui/react-slider';
 
@@ -11,6 +11,8 @@ interface Props {
     passwordLength: number[]
     setPasswordLength: React.Dispatch<React.SetStateAction<number[]>>
 }
+
+// type PasswordStrength = "weak" | "medium" | "strong";
 
 const PasswordForm: React.FC<Props> = ({ formData, setFormData, generatedPassword, generatePassword, copyPassword, passwordLength, setPasswordLength }) => {
     function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
@@ -40,7 +42,7 @@ const PasswordForm: React.FC<Props> = ({ formData, setFormData, generatedPasswor
                         <p>Characters</p>
                         <p className="font-bold">{passwordLength}</p>
                     </label>
-                    <Slider.Root min={8} max={35} step={1} value={passwordLength} onValueChange={(value) => handleSlider(value)} className="relative flex h-5 w-full touch-none items-center">
+                    <Slider.Root min={8} max={35} step={1} value={passwordLength} onValueChange={(value) => handleSlider(value)} className="relative flex h-5 w-full touch-none items-center cursor-pointer">
                         <Slider.Track className="relative h-1 w-full grow rounded-full bg-white" >
                             <Slider.Range className="absolute h-full rounded-full bg-purple-600" />
                         </Slider.Track>
@@ -61,6 +63,16 @@ const PasswordForm: React.FC<Props> = ({ formData, setFormData, generatedPasswor
                 <div className="flex gap-3 items-center">
                     <input onChange={handleChange} checked={formData.isSymbols} name="isSymbols" className="bg-transparent border-neutral-50 rounded-sm p-2 cursor-pointer focus:ring-0 text-transparent checked:border-neutral-50 checked:hover:border-neutral-50" type="checkbox" id="symbols" />
                     <label className="text-neutral-50 text-lg cursor-pointer" htmlFor="symbols">Include symbols</label>
+                </div>
+
+                <div className="flex justify-between items-center">
+                    <p className="text-neutral-50 text-lg lg:text-xl">Strength</p>
+
+                    <div className="flex items-center gap-2">
+                        <div className="w-3 h-6 border border-neutral-50 bg-neutral-50 rounded-xl"></div>
+                        <div className={`w-3 h-6 border border-neutral-50 rounded-xl transition-colors ${(passwordLength[0] > 10 && formData.isNumbers && formData.isSymbols) ? "bg-neutral-50" : ""}`}></div>
+                        <div className={`w-3 h-6 border border-neutral-50 rounded-xl transition-colors ${(passwordLength[0] > 14 && formData.isUpperCase && formData.isNumbers && formData.isSymbols) ? "bg-neutral-50" : ""}`}></div>
+                    </div>
                 </div>
             </form>
 
