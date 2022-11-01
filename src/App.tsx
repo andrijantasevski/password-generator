@@ -19,7 +19,7 @@ function App() {
     isNumbers: true,
     isSymbols: true
   });
-  const [passwordLength, setPasswordLength] = useState<number[]>([12]);
+  const [passwordLength, setPasswordLength] = useState<number[]>([17]);
 
   useEffect(() => {
     generatePassword(passwordLength[0], formData.isUpperCase, formData.isNumbers, formData.isSymbols)
