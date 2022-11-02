@@ -10,11 +10,10 @@ interface Props {
     copyPassword: (password: string) => void
     passwordLength: number[]
     setPasswordLength: React.Dispatch<React.SetStateAction<number[]>>
+    passwordStrengthValue: number
 }
 
-// type PasswordStrength = "weak" | "medium" | "strong";
-
-const PasswordForm: React.FC<Props> = ({ formData, setFormData, generatedPassword, generatePassword, copyPassword, passwordLength, setPasswordLength }) => {
+const PasswordForm: React.FC<Props> = ({ formData, setFormData, generatedPassword, generatePassword, copyPassword, passwordLength, setPasswordLength, passwordStrengthValue }) => {
     function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
         const { name, value, type, checked } = event.target
 
@@ -69,9 +68,10 @@ const PasswordForm: React.FC<Props> = ({ formData, setFormData, generatedPasswor
                     <p className="text-neutral-50 text-lg lg:text-xl">Strength</p>
 
                     <div className="flex items-center gap-2">
-                        <div className="w-3 h-6 border border-neutral-50 bg-neutral-50 rounded-xl"></div>
-                        <div className={`w-3 h-6 border border-neutral-50 rounded-xl transition-colors ${(passwordLength[0] > 10 && formData.isNumbers && formData.isSymbols) ? "bg-neutral-50" : ""}`}></div>
-                        <div className={`w-3 h-6 border border-neutral-50 rounded-xl transition-colors ${(passwordLength[0] > 14 && formData.isUpperCase && formData.isNumbers && formData.isSymbols) ? "bg-neutral-50" : ""}`}></div>
+                        <div className={`w-3 h-6 border border-neutral-50 rounded-xl transition-colors ${(passwordStrengthValue >= 0) ? "bg-neutral-50" : ""}`}></div>
+                        <div className={`w-3 h-6 border border-neutral-50 rounded-xl transition-colors ${(passwordStrengthValue >= 1) ? "bg-neutral-50" : ""}`}></div>
+                        <div className={`w-3 h-6 border border-neutral-50 rounded-xl transition-colors ${(passwordStrengthValue >= 2) ? "bg-neutral-50" : ""}`}></div>
+                        <div className={`w-3 h-6 border border-neutral-50 rounded-xl transition-colors ${(passwordStrengthValue >= 3) ? "bg-neutral-50" : ""}`}></div>
                     </div>
                 </div>
             </form>
