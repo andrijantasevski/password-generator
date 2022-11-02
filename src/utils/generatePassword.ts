@@ -1,8 +1,10 @@
 import { useState } from "react";
 import generateRandomInt from "./generateRandomInt";
+import { passwordStrength } from 'check-password-strength'
 
 export default function usePassword() {
     const [password, setPassword] = useState("");
+    const [passwordStrengthValue, setPasswordStrengthValue] = useState<number>(0)
 
     function generatePassword(passwordLength: number, isUpperCase: boolean, isNumbers: boolean, isSymbols: boolean) {
 
@@ -32,10 +34,13 @@ export default function usePassword() {
         const passwordString = passwordArray.join("");
 
         setPassword(passwordString);
+
+        setPasswordStrengthValue(passwordStrength(passwordString).id);
     }
 
     return {
         password,
+        passwordStrengthValue,
         generatePassword
     }
 } 

@@ -12,14 +12,14 @@ export interface FormTypes {
 }
 
 function App() {
-  const { password, generatePassword } = usePassword();
+  const { password, generatePassword, passwordStrengthValue } = usePassword();
   const { passwordCopied, copyPassword } = useCopyPassword();
   const [formData, setFormData] = useState<FormTypes>({
     isUpperCase: true,
     isNumbers: true,
     isSymbols: true
   });
-  const [passwordLength, setPasswordLength] = useState<number[]>([17]);
+  const [passwordLength, setPasswordLength] = useState<number[]>([20]);
 
   useEffect(() => {
     generatePassword(passwordLength[0], formData.isUpperCase, formData.isNumbers, formData.isSymbols)
@@ -29,7 +29,7 @@ function App() {
     <div className="main-background relative flex h-screen items-center justify-center">
       <div className="mx-auto w-11/12 lg:w-6/12 xl:w-5/12 grid grid-cols-1 gap-5">
         <PasswordGenerator generatedPassword={password} passwordLength={passwordLength} generatePassword={generatePassword} formData={formData} />
-        <PasswordForm formData={formData} setFormData={setFormData} generatePassword={generatePassword} copyPassword={copyPassword} generatedPassword={password} passwordLength={passwordLength} setPasswordLength={setPasswordLength} />
+        <PasswordForm formData={formData} setFormData={setFormData} generatePassword={generatePassword} copyPassword={copyPassword} generatedPassword={password} passwordLength={passwordLength} setPasswordLength={setPasswordLength} passwordStrengthValue={passwordStrengthValue} />
       </div>
       <PasswordCopiedPopUp passwordCopied={passwordCopied} />
     </div>
