@@ -2,7 +2,7 @@
 
 ## Links
 
-- [Password Generator](https://www.google.com)
+- [Password Generator](https://password-generator.andrijan.dev/)
 - [Figma design](https://www.figma.com/file/1JXhYfUmhlItCKLzxbeBIG/Password-Generator-Public)
 
 ## Built with
